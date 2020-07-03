@@ -1,46 +1,26 @@
 const express = require("express");
 const exphbs =require("express-handlebars");
-const meals=require("./models/meals");
-const gif = require("./models/gif");
+const bodyParser = require('body-parser');
+//load the enviroment variable file
+require('dotenv').config({path:"./config/keys.env"});
 
 
 const app=express();
 
 app.engine("handlebars",exphbs());
 app.set("view engine","handlebars");
-
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static("public"));
 
-app.get("/",(req,res)=>{
-    res.render("home",{
-        title:"Home Page",
-        data : gif.getGif(),
-        data1 : meals.getTopSeller() 
+//load controllers
+const generalController= require("./controllers/general");
+const loginController=require("./controllers/login");
 
-    })
-});
+app.use("/",generalController);
+app.use("/login",loginController);
 
-app.get("/packages",(req,res)=>{
-    res.render("packages",{
-        title:"Package Listings",
-        data :meals.getTopSeller()
-    })
-});
+const PORT=3000;
 
-app.get("/registration",(req,res)=>{
-    res.render("registration",{
-        title:"Registration Page"
-    })
-});
-
-app.get("/signin",(req,res)=>{
-    res.render("signin",{
-        title:"Sign In Page"
-    })
-});
-
-const port=3000;
-
-app.listen(port,()=>{
+app.listen(PORT,()=>{
     console.log(`Web is running`);
 })

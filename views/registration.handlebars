@@ -1,5 +1,8 @@
-<form action="action_page.php">
+<form action="registration" method="POST">
         <div class="container">
+            {{#each errors}}
+<div><strong>{{this}}</strong></div>
+{{/each}}
             <p>Please fill in this form to create an account.</p>
             <hr>
 
@@ -10,13 +13,13 @@
             <input type="text" name="lname" id="lname" placeholder="Enter Your Last Name">
             
             <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter email" name="email" id="email" required>
+            <input type="text" placeholder="Enter email" name="email" id="email" >
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id=psw required>
+            <input type="password" placeholder="Enter Password" name="psw" id=psw >
 
             <label for="psw-repeat"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Repaet Password" name="pws-repeat" id="psw-repeat" required>
+            <input type="password" placeholder="Repaet Password" name="pswrepeat" id="pswrepeat" >
             <hr>
 
             <p>By creating an account you agree to our <a href="#">Terms and Privacy</a>.</p>
